@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Tugas 3 &#8212; Su`ud Ahmad</title>
+    <title>K-NN (Tugas 3) &#8212; Su`ud Ahmad</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Tugas 2" href="notebooks2.html" />
+    <link rel="prev" title="Diskritisasi (Tugas 2)" href="notebooks2.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -115,17 +115,17 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="notebooks1.html">
-   Tugas 1
+   Menentukan Jarak Atribut Nominal
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="notebooks2.html">
-   Tugas 2
+   Diskritisasi (Tugas 2)
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Tugas 3
+   K-NN (Tugas 3)
   </a>
  </li>
 </ul>
@@ -366,7 +366,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Tugas 3</h1>
+                <h1>K-NN (Tugas 3)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -391,8 +391,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="tugas-3">
-<h1>Tugas 3<a class="headerlink" href="#tugas-3" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="k-nn-tugas-3">
+<h1>K-NN (Tugas 3)<a class="headerlink" href="#k-nn-tugas-3" title="Permalink to this headline">#</a></h1>
 <section id="implemetasi-k-nn-pada-datase-iris">
 <h2>Implemetasi K-NN Pada datase Iris<a class="headerlink" href="#implemetasi-k-nn-pada-datase-iris" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -429,7 +429,7 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-37f01abf-bde3-49a5-ad5b-49be71c4112d">
+  <div id="df-bbd52e79-10b1-4a7b-a8de-5bb8b1593dff">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -500,7 +500,7 @@ title="Print to PDF"
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-37f01abf-bde3-49a5-ad5b-49be71c4112d')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-bbd52e79-10b1-4a7b-a8de-5bb8b1593dff')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
 
@@ -551,12 +551,12 @@ title="Print to PDF"
 
       <script>
         const buttonEl =
-          document.querySelector('#df-37f01abf-bde3-49a5-ad5b-49be71c4112d button.colab-df-convert');
+          document.querySelector('#df-bbd52e79-10b1-4a7b-a8de-5bb8b1593dff button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-37f01abf-bde3-49a5-ad5b-49be71c4112d');
+          const element = document.querySelector('#df-bbd52e79-10b1-4a7b-a8de-5bb8b1593dff');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -589,7 +589,7 @@ title="Print to PDF"
 <p>Membagi data latih dan uji</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.29</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -672,13 +672,25 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-      Setosa       1.00      1.00      1.00        10
-  Versicolor       1.00      1.00      1.00        10
-   Virginica       1.00      1.00      1.00        10
+      Setosa       1.00      1.00      1.00        14
+  Versicolor       0.79      1.00      0.88        15
+   Virginica       1.00      0.73      0.85        15
 
-    accuracy                           1.00        30
-   macro avg       1.00      1.00      1.00        30
-weighted avg       1.00      1.00      1.00        30
+    accuracy                           0.91        44
+   macro avg       0.93      0.91      0.91        44
+weighted avg       0.93      0.91      0.91        44
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">classifier</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9622641509433962
 </pre></div>
 </div>
 </div>
@@ -717,7 +729,7 @@ weighted avg       1.00      1.00      1.00        30
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Tugas 2</p>
+            <p class="prev-next-title">Diskritisasi (Tugas 2)</p>
         </div>
     </a>
 </div>
