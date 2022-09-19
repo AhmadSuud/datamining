@@ -393,6 +393,16 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="k-nn-tugas-3">
 <h1>K-NN (Tugas 3)<a class="headerlink" href="#k-nn-tugas-3" title="Permalink to this headline">#</a></h1>
+<p>##Pengertian K-NN</p>
+<p>K-NN adalah sebuah algoritma untuk melakukan klasifikasi terhdap objek latih yang jaraknya paling dekat dengan objek tersebut</p>
+<p>##Algoritma K-NN</p>
+<ol class="simple">
+<li><p>Menentukan parameter k (jumlah tetangga paling dekat)</p></li>
+<li><p>Menghitung kuadrat jarak eucliden objek terhdap data  training yang diberikan</p></li>
+<li><p>Mengurutkan hasil no 2 secara ascending</p></li>
+<li><p>mengumpulkan kategori y (klasifikasi nearest neighbor berdasarkan nilai k)</p></li>
+<li><p>dengan menggunakan kategori nearest neighbor yang paling mayoritas maka dapat di prediksi kategori objek.</p></li>
+</ol>
 <section id="implemetasi-k-nn-pada-datase-iris">
 <h2>Implemetasi K-NN Pada datase Iris<a class="headerlink" href="#implemetasi-k-nn-pada-datase-iris" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -413,6 +423,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Mengimport Data</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://gist.githubusercontent.com/netj/8836201/raw/6f9306ad21398ea43cba4f7d537619d0e07d5ae3/iris.csv&#39;</span>
@@ -423,13 +434,13 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-bbd52e79-10b1-4a7b-a8de-5bb8b1593dff">
+  <div id="df-8e252c72-d590-42b0-a323-eef36b47ed24">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -497,10 +508,59 @@ title="Print to PDF"
       <td>0.2</td>
       <td>Setosa</td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>144</th>
+      <td>6.7</td>
+      <td>3.3</td>
+      <td>5.7</td>
+      <td>2.5</td>
+      <td>Virginica</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>Virginica</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>Virginica</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>Virginica</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>Virginica</td>
+    </tr>
   </tbody>
 </table>
+<p>149 rows × 5 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-bbd52e79-10b1-4a7b-a8de-5bb8b1593dff')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-8e252c72-d590-42b0-a323-eef36b47ed24')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
 
@@ -551,12 +611,12 @@ title="Print to PDF"
 
       <script>
         const buttonEl =
-          document.querySelector('#df-bbd52e79-10b1-4a7b-a8de-5bb8b1593dff button.colab-df-convert');
+          document.querySelector('#df-8e252c72-d590-42b0-a323-eef36b47ed24 button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-bbd52e79-10b1-4a7b-a8de-5bb8b1593dff');
+          const element = document.querySelector('#df-8e252c72-d590-42b0-a323-eef36b47ed24');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -580,21 +640,146 @@ title="Print to PDF"
 <p>Memisahkan Features dan Label</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>  
 </pre></div>
 </div>
 </div>
 </div>
 <p>Membagi data latih dan uji</p>
+<p>Pada tahap ini data yang jumlahnya 150 ajan dibagi menjadi data latih dan data uji dengan menggunakan **train_test_split ** agar data yang dibagi seimbang</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.29</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Label endcoding</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[5.  2.  3.5 1. ]
+ [4.9 3.  1.4 0.2]
+ [4.4 2.9 1.4 0.2]
+ [5.  2.3 3.3 1. ]
+ [4.9 2.5 4.5 1.7]
+ [6.3 2.5 5.  1.9]
+ [6.3 2.3 4.4 1.3]
+ [5.  3.5 1.3 0.3]
+ [6.1 2.8 4.7 1.2]
+ [5.  3.5 1.6 0.6]
+ [5.8 4.  1.2 0.2]
+ [5.6 2.5 3.9 1.1]
+ [5.2 3.4 1.4 0.2]
+ [5.8 2.8 5.1 2.4]
+ [5.  3.4 1.6 0.4]
+ [5.6 2.9 3.6 1.3]
+ [6.  2.7 5.1 1.6]
+ [6.6 3.  4.4 1.4]
+ [6.4 2.9 4.3 1.3]
+ [6.4 2.8 5.6 2.2]
+ [7.7 3.8 6.7 2.2]
+ [5.7 2.6 3.5 1. ]
+ [5.2 4.1 1.5 0.1]
+ [6.1 3.  4.9 1.8]
+ [7.7 2.8 6.7 2. ]
+ [6.2 2.8 4.8 1.8]
+ [7.7 3.  6.1 2.3]
+ [5.8 2.6 4.  1.2]
+ [6.2 2.9 4.3 1.3]
+ [6.9 3.2 5.7 2.3]
+ [5.8 2.7 5.1 1.9]
+ [7.3 2.9 6.3 1.8]
+ [6.8 2.8 4.8 1.4]
+ [4.4 3.  1.3 0.2]
+ [5.  3.6 1.4 0.2]
+ [6.  2.2 5.  1.5]
+ [6.4 2.8 5.6 2.1]
+ [4.9 2.4 3.3 1. ]
+ [6.6 2.9 4.6 1.3]
+ [6.7 3.1 5.6 2.4]
+ [7.7 2.6 6.9 2.3]
+ [5.1 3.8 1.9 0.4]
+ [4.8 3.4 1.6 0.2]
+ [5.4 3.  4.5 1.5]
+ [5.4 3.4 1.7 0.2]
+ [6.9 3.1 4.9 1.5]
+ [7.9 3.8 6.4 2. ]
+ [5.4 3.7 1.5 0.2]
+ [5.7 3.8 1.7 0.3]
+ [6.8 3.  5.5 2.1]
+ [5.5 2.3 4.  1.3]
+ [7.6 3.  6.6 2.1]
+ [5.2 2.7 3.9 1.4]
+ [5.7 4.4 1.5 0.4]
+ [4.8 3.1 1.6 0.2]
+ [5.  3.2 1.2 0.2]
+ [4.5 2.3 1.3 0.3]
+ [6.5 3.2 5.1 2. ]
+ [5.4 3.4 1.5 0.4]
+ [6.  2.9 4.5 1.5]
+ [5.9 3.2 4.8 1.8]
+ [5.7 2.9 4.2 1.3]
+ [6.5 3.  5.5 1.8]
+ [4.9 3.1 1.5 0.2]
+ [5.9 3.  4.2 1.5]
+ [5.7 3.  4.2 1.2]
+ [4.9 3.6 1.4 0.1]
+ [5.5 2.4 3.8 1.1]
+ [6.7 2.5 5.8 1.8]
+ [6.3 2.5 4.9 1.5]
+ [7.1 3.  5.9 2.1]
+ [5.5 4.2 1.4 0.2]
+ [6.1 2.9 4.7 1.4]
+ [6.4 3.2 5.3 2.3]
+ [6.  3.  4.8 1.8]
+ [6.7 3.  5.  1.7]
+ [6.7 3.3 5.7 2.5]
+ [4.3 3.  1.1 0.1]
+ [5.1 2.5 3.  1.1]
+ [5.  3.  1.6 0.2]
+ [5.1 3.5 1.4 0.3]
+ [6.3 2.7 4.9 1.8]
+ [6.3 3.3 4.7 1.6]
+ [6.8 3.2 5.9 2.3]
+ [5.2 3.5 1.5 0.2]
+ [5.  3.3 1.4 0.2]
+ [4.8 3.  1.4 0.3]
+ [5.4 3.9 1.7 0.4]
+ [5.  3.4 1.5 0.2]
+ [5.6 2.7 4.2 1.3]
+ [6.7 3.3 5.7 2.1]
+ [6.2 3.4 5.4 2.3]
+ [7.2 3.2 6.  1.8]
+ [4.6 3.6 1.  0.2]
+ [6.3 2.8 5.1 1.5]
+ [4.7 3.2 1.3 0.2]
+ [6.5 3.  5.8 2.2]
+ [4.4 3.2 1.3 0.2]
+ [6.1 3.  4.6 1.4]
+ [6.1 2.8 4.  1.3]
+ [5.8 2.7 3.9 1.2]
+ [6.  2.2 4.  1. ]
+ [5.4 3.9 1.3 0.4]
+ [6.7 3.  5.2 2.3]
+ [6.4 3.1 5.5 1.8]
+ [4.6 3.2 1.4 0.2]
+ [6.2 2.2 4.5 1.5]
+ [5.6 3.  4.5 1.5]
+ [4.7 3.2 1.6 0.2]
+ [7.4 2.8 6.1 1.9]
+ [6.9 3.1 5.1 2.3]
+ [6.4 2.7 5.3 1.9]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Membuat label endcoding</p>
+<p>karena kellas dari dataset ini berupa teks maka perlu dilakukan encoding</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lb</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
@@ -624,7 +809,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">error</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
     <span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
     <span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
@@ -632,7 +817,7 @@ title="Print to PDF"
     <span class="n">error</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pred_i</span> <span class="o">!=</span> <span class="n">y_test</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">error</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">error</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
          <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Rata-Rata Error terhadap nilai K&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Nilai K&#39;</span><span class="p">)</span>
@@ -642,9 +827,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/notebooks3_14_0.png" src="_images/notebooks3_14_0.png" />
+<img alt="_images/notebooks3_20_0.png" src="_images/notebooks3_20_0.png" />
 </div>
 </div>
+<p>Bisa dilihat dari grafik diatas yang memiliki tingkat eror yang kecil yaitu 2,3,4,5 maka nilai k yang diambil nantinya 4</p>
 <p>Training</p>
 <p>Menggunakan  nilai Konstanta K=4</p>
 <div class="cell docutils container">
@@ -672,27 +858,29 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-      Setosa       1.00      1.00      1.00        14
-  Versicolor       0.79      1.00      0.88        15
-   Virginica       1.00      0.73      0.85        15
+      Setosa       1.00      1.00      1.00        13
+  Versicolor       0.87      1.00      0.93        13
+   Virginica       1.00      0.83      0.91        12
 
-    accuracy                           0.91        44
-   macro avg       0.93      0.91      0.91        44
-weighted avg       0.93      0.91      0.91        44
+    accuracy                           0.95        38
+   macro avg       0.96      0.94      0.95        38
+weighted avg       0.95      0.95      0.95        38
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">classifier</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">ConfusionMatrixDisplay</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">display_labels</span><span class="o">=</span><span class="n">lb</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9622641509433962
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sklearn.metrics._plot.confusion_matrix.ConfusionMatrixDisplay at 0x7fab28559ed0&gt;
 </pre></div>
 </div>
+<img alt="_images/notebooks3_26_1.png" src="_images/notebooks3_26_1.png" />
 </div>
 </div>
 </section>
