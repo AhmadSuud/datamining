@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Naive Bayes Classifier (Tugas 4) &#8212; Su`ud Ahmad</title>
+    <title>Naive Bayes Clasifier (Tugas 4) &#8212; Su`ud Ahmad</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="K-NN (Tugas 3)" href="notebooks3.html" />
@@ -130,7 +132,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Naive Bayes Classifier (Tugas 4)
+   Naive Bayes Clasifier (Tugas 4)
   </a>
  </li>
 </ul>
@@ -347,7 +349,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Naive Bayes Classifier (Tugas 4)</h1>
+                <h1>Naive Bayes Clasifier (Tugas 4)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -359,8 +361,28 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="naive-bayes-classifier-tugas-4">
-<h1>Naive Bayes Classifier (Tugas 4)<a class="headerlink" href="#naive-bayes-classifier-tugas-4" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="naive-bayes-clasifier-tugas-4">
+<h1>Naive Bayes Clasifier (Tugas 4)<a class="headerlink" href="#naive-bayes-clasifier-tugas-4" title="Permalink to this headline">#</a></h1>
+<p>##Algoritma Naive Bayes Clasifier</p>
+<p>Naïve Bayes Clasifier atau disebut juga dengan
+Bayesian Classification merupakan metode
+pengklasifikasian statistik yang didasarkan pada
+teorema bayes yang dapat digunakan untuk
+memprediksi probabilitas keanggotaan suatu kelas.
+Bayesian Classification terbukti memiliki akurasi dan
+kecepatan yang tinggi saat diaplikasikan ke dalam
+database yang besar.</p>
+<p>Bentuk umum teorema bayes adalah sebagai
+berikut:</p>
+<div class="math notranslate nohighlight">
+\[
+   P(H|X)\frac{P( X | H) P (H)}{P(X)}
+\]</div>
+<p>Dimana :</p>
+<p><strong>X</strong> = data kelas yang belum diketahui</p>
+<p><strong>H</strong> = Hipotesa data X merupakan suatu kelas spesifik</p>
+<p><strong>P(H|X)</strong> = Probabilitas hipotesis H berdasarkan kondisi X (Posterior Probability)</p>
+<p><strong>P(H)</strong> = Probabilitas hipotesis H (prior probability)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -370,6 +392,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Import Dataset</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://gist.githubusercontent.com/netj/8836201/raw/6f9306ad21398ea43cba4f7d537619d0e07d5ae3/iris.csv&#39;</span>
@@ -378,6 +401,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Menampilkan Dataset</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -386,7 +410,7 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-98e890e2-dcff-44e7-a5e4-22981389c78f">
+  <div id="df-96b0cc69-d0b5-4f7d-8e37-cfd56d7948a0">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -457,7 +481,7 @@ title="Print to PDF"
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-98e890e2-dcff-44e7-a5e4-22981389c78f')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-96b0cc69-d0b5-4f7d-8e37-cfd56d7948a0')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
 
@@ -508,12 +532,12 @@ title="Print to PDF"
 
       <script>
         const buttonEl =
-          document.querySelector('#df-98e890e2-dcff-44e7-a5e4-22981389c78f button.colab-df-convert');
+          document.querySelector('#df-96b0cc69-d0b5-4f7d-8e37-cfd56d7948a0 button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-98e890e2-dcff-44e7-a5e4-22981389c78f');
+          const element = document.querySelector('#df-96b0cc69-d0b5-4f7d-8e37-cfd56d7948a0');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -534,6 +558,7 @@ title="Print to PDF"
   </div>
 </div></div>
 </div>
+<p>Memisahkan antara fitur dengan label/kategori dengan variable X mengambil 4 kolom dan variable Y mengambil kolom label/kategori</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span> <span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
@@ -542,6 +567,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Karena kategorinya berupa numerik maka dilakukan transform dengan label encoder</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
@@ -569,6 +595,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Membagi Data Train dan Test</p>
+<p>Pada tahap ini data yang jumlahnya 150 ajan dibagi menjadi 2 yaitu data Train dan data Test dengan menggunakan **train_test_split ** agar data yang dibagi seimbang dengan size 0.3 yaitu 30% dari dari 150 dan dimulai dari 0</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -577,6 +605,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Standarisasi</p>
+<p>Algoritma Naive bayes pada pengujian kali ini menggunakan metrik jarak (Euclidean), sehingga memiliki data yang terdistribusi merata khususnya pada distribusi normal akan meningkatkan performa model Naive Bayes ini. Maka dari itu diperlukan proses standarisasi data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
@@ -587,6 +617,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Melakukan Training</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
@@ -601,6 +632,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Melakukan Predik pasa X_test</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
@@ -608,6 +640,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Menampilkan Hasil predik degan menggunakan confusion matrix</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
@@ -616,6 +649,21 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cm</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[16,  0,  0],
+       [ 0, 18,  0],
+       [ 0,  0, 11]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mengecek Akurasi model yang telah dibuat</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
